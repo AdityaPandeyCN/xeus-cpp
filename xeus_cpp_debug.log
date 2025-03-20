@@ -1,0 +1,80 @@
+=== Magic initialization started ===
+=== Plugin loading started ===
+Plugin directory: /home/aditya/cppinterop/xeus-cpp/build
+=== Magic initialization started ===
+=== Plugin loading started ===
+Plugin directory: /home/aditya/cppinterop/xeus-cpp/build
+Scanning for plugins in: /home/aditya/cppinterop/xeus-cpp/build
+Files in plugin directory:
+  xcpp
+  CMakeCache.txt
+  cmake_install.cmake
+  share
+  libxeus-cpp.so.0.7.0dev
+  libxeus-cpp.a
+  libxeus-cpp.so
+  xeus-cppTargets.cmake
+  xeus-cppConfig.cmake
+  etc
+  libxeus-cpp.so.0
+  test
+  file_magic.so
+  CMakeFiles
+  xeus-cppConfigVersion.cmake
+  Makefile
+  libfile_magic.so
+Attempting to load: /home/aditya/cppinterop/xeus-cpp/build/libxeus-cpp.so
+Successfully loaded library, looking for create_plugin...
+Failed to find create_plugin function: /home/aditya/cppinterop/xeus-cpp/build/libxeus-cpp.so.0: undefined symbol: create_plugin
+Attempting to load: /home/aditya/cppinterop/xeus-cpp/build/file_magic.so
+Successfully loaded library, looking for create_plugin...
+Loaded magic plugin: file
+Plugin supports line magic
+Plugin successfully registered
+Attempting to load: /home/aditya/cppinterop/xeus-cpp/build/libfile_magic.so
+Successfully loaded library, looking for create_plugin...
+Loaded magic plugin: file
+Plugin supports line magic
+Plugin successfully registered
+=== Magic initialization started ===
+=== Plugin loading started ===
+Plugin directory: /home/aditya/cppinterop/xeus-cpp/build
+Scanning for plugins in: /home/aditya/cppinterop/xeus-cpp/build
+Files in plugin directory:
+  xcpp
+  CMakeCache.txt
+  cmake_install.cmake
+  share
+  libxeus-cpp.so.0.7.0dev
+  libxeus-cpp.a
+  libxeus-cpp.so
+  xeus-cppTargets.cmake
+  xeus-cppConfig.cmake
+  etc
+  libxeus-cpp.so.0
+  test
+  file_magic.so
+  CMakeFiles
+  xeus-cppConfigVersion.cmake
+  Makefile
+  libfile_magic.so
+Attempting to load: /home/aditya/cppinterop/xeus-cpp/build/libxeus-cpp.so
+Successfully loaded library, looking for create_plugin...
+Failed to find create_plugin function: /home/aditya/cppinterop/xeus-cpp/build/libxeus-cpp.so.0: undefined symbol: create_plugin
+Attempting to load: /home/aditya/cppinterop/xeus-cpp/build/file_magic.so
+Successfully loaded library, looking for create_plugin...
+Loaded magic plugin: file
+Plugin supports line magic
+Plugin successfully registered
+Attempting to load: /home/aditya/cppinterop/xeus-cpp/build/libfile_magic.so
+Successfully loaded library, looking for create_plugin...
+Loaded magic plugin: file
+Plugin supports line magic
+Plugin successfully registered
+=== Plugin loading started ===
+Plugin directory: /home/aditya/cppinterop/xeus-cpp/build/libfile_magic.so
+Loading specific plugin file: /home/aditya/cppinterop/xeus-cpp/build/libfile_magic.so
+Successfully loaded library, looking for create_plugin...
+Loaded magic plugin: file
+Plugin supports line magic
+Plugin successfully registered
