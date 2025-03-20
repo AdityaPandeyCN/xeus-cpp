@@ -374,7 +374,7 @@ __get_cxx_version ()
     // Use the direct file path instead of a directory
     std::string plugin_path = "/home/aditya/cppinterop/xeus-cpp/build/libfile_magic.so";
     
-    // Comment out direct implementation registration
+    
     // preamble_manager["magics"].get_cast<xmagics_manager>().register_magic("file", file_magic_instance);
     
     // Load the plugin directly
