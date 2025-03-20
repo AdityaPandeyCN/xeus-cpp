@@ -108,6 +108,8 @@ endif()
 
 find_package(argparse REQUIRED)
 find_package(pugixml REQUIRED)
+# Add xplugin
+find_package(xplugin REQUIRED)
 
 # Configuration
 # =============
@@ -215,6 +217,7 @@ set(XEUS_CPP_SRC
     src/xparser.cpp
     src/xutils.cpp
     src/xmagics/os.cpp
+    src/xmagics/file.cpp
 )
 
 if(NOT EMSCRIPTEN)
@@ -324,10 +327,13 @@ macro(xeus_cpp_create_target target_name linkage output_name)
 
     target_compile_features(${target_name} PRIVATE cxx_std_17)
 
+
     target_include_directories(${target_name}
-                               PUBLIC
-                               $<BUILD_INTERFACE:${XEUS_CPP_INCLUDE_DIR}>
-                               $<INSTALL_INTERFACE:include>)
+                           PUBLIC
+                           $<BUILD_INTERFACE:${XEUS_CPP_INCLUDE_DIR}>
+                           $<INSTALL_INTERFACE:include>
+                           PRIVATE
+                           ${xplugin_INCLUDE_DIRS})
 
     if (XEUS_CPP_USE_SHARED_XEUS)
         set(XEUS_CPP_XEUS_TARGET xeus)
@@ -363,7 +369,7 @@ macro(xeus_cpp_create_target target_name linkage output_name)
         endif()
     elseif (NOT EMSCRIPTEN)
         # Curl initialised specifically for xassist
-        target_link_libraries(${target_name} PUBLIC ${XEUS_CPP_XEUS_TARGET} clangCppInterOp pugixml argparse::argparse curl)
+        target_link_libraries(${target_name} PUBLIC ${XEUS_CPP_XEUS_TARGET} clangCppInterOp pugixml argparse::argparse curl ${xplugin_LIBRARIES})
     else ()
         target_link_libraries(${target_name} PUBLIC ${XEUS_CPP_XEUS_TARGET} clangCppInterOp pugixml argparse::argparse)
     endif()
@@ -460,6 +466,31 @@ if(EMSCRIPTEN)
     # 3) Shift the resource dir and the sysroot to a common location.
     # 4) Preload everything required together.
 endif()
+# Tests
+# =====
+# File magic plugin
+# ================
+# Build file magic plugin
+add_library(file_magic SHARED plugins/file_magic/file_magic_plugin.cpp)
+set_target_properties(file_magic PROPERTIES 
+    PREFIX ""
+    OUTPUT_NAME "file_magic"
+)
+target_include_directories(file_magic PRIVATE 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${xplugin_INCLUDE_DIRS}
+)
+target_link_libraries(file_magic PRIVATE
+    ${xplugin_LIBRARIES}
+)
+target_compile_features(file_magic PRIVATE cxx_std_17)
+
+install(
+  TARGETS file_magic
+  RUNTIME DESTINATION ${XEUS_INSTALL_PLUGINSDIR}
+  LIBRARY DESTINATION ${XEUS_INSTALL_PLUGINSDIR}
+)
+
 # Tests
 # =====
 

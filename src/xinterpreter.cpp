@@ -9,6 +9,7 @@
 
 #include "xeus/xhelper.hpp"
 #include "xeus/xsystem.hpp"
+#include <fstream>
 
 #include "xeus-cpp/xbuffer.hpp"
 #include "xeus-cpp/xeus_cpp_config.hpp"
@@ -23,7 +24,10 @@
 #endif
 #include "xparser.hpp"
 #include "xsystem.hpp"
-
+#include "xmagics/file.hpp"
+//#include <xplugin/xplugin.hpp>
+// Instance declared in src/xmagics/file.cpp
+//extern xcpp::file_magic file_magic_instance;
 using Args = std::vector<const char*>;
 
 void* createInterpreter(const Args &ExtraArgs = {}) {
@@ -365,16 +369,19 @@ __get_cxx_version ()
         //NOLINTEND(cppcoreguidelines-owning-memory)
     }
 
-    void interpreter::init_magic()
-    {
-        // preamble_manager["magics"].get_cast<xmagics_manager>().register_magic("executable",
-        // executable(m_interpreter));
-        // preamble_manager["magics"].get_cast<xmagics_manager>().register_magic("timeit",
-        // timeit(&m_interpreter));
-        // preamble_manager["magics"].get_cast<xmagics_manager>().register_magic("python", pythonexec());
-        preamble_manager["magics"].get_cast<xmagics_manager>().register_magic("file", writefile());
-#ifndef EMSCRIPTEN
-        preamble_manager["magics"].get_cast<xmagics_manager>().register_magic("xassist", xassist());
-#endif
-    }
+     void interpreter::init_magic()
+{
+    // Use the direct file path instead of a directory
+    std::string plugin_path = "/home/aditya/cppinterop/xeus-cpp/build/libfile_magic.so";
+    
+    // Comment out direct implementation registration
+    // preamble_manager["magics"].get_cast<xmagics_manager>().register_magic("file", file_magic_instance);
+    
+    // Load the plugin directly
+    preamble_manager["magics"].get_cast<xmagics_manager>().load_plugins(plugin_path);
+    
+    #ifndef EMSCRIPTEN
+    preamble_manager["magics"].get_cast<xmagics_manager>().register_magic("xassist", xassist());
+    #endif
+}
 }
